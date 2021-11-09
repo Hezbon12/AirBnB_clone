@@ -2,7 +2,7 @@
 
 # AirBnB Clone
 
-#### Description
+### Description
 > This is phase one of the Airbnb Clone: the console.
 > This repository holds a command interpreter and classes (i.e. BaseModel class
 > and several other classes that inherit from it: Amenity, City, State, Place,

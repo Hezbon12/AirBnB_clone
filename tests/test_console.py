@@ -120,7 +120,7 @@ class Test_Console(unittest.TestCase):
     def test_destroy_error_invalid_id(self):
         with captured_output() as (out, err):
             self.cli.do_destroy("BaseModel " +
-                                "f519fb40-1f5c-458b-945c-2ee8eaaf4900")
+                                "b7e2bf1b-c80b-47ca-92ae-1c74149323e6")
         output = out.getvalue().strip()
         self.assertEqual(output, "** no instance found **")
 
@@ -153,14 +153,14 @@ class Test_Console(unittest.TestCase):
     def test_update_correct(self):
         with captured_output() as (out, err):
             self.cli.do_update("BaseModel " +
-                               "89fb5a8e-10a4-4dfe-9252-eee921991e79 name Bay")
+                               "89fb5a8e-10a4-4dfe-9252-eee921991e79 name Hezbon")
         output = out.getvalue().strip()
         self.assertEqual(output, '')
 
         with captured_output() as (out, err):
             self.cli.do_show("BaseModel 89fb5a8e-10a4-4dfe-9252-eee921991e79")
         output = out.getvalue().strip()
-        self.assertTrue("Bay" in output)
+        self.assertTrue("Hezbon" in output)
         self.assertFalse("Helidah" in output)
 
     def test_update_error_invalid_id(self):

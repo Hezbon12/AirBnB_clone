@@ -87,15 +87,15 @@ class Test_Console(unittest.TestCase):
         self.assertTrue(output in output2)
 
     def test_destroy_correct(self):
-        test_args = {'updated_at': datetime(2021-11-12 13:34:28.290717),
-                     'id': 'fd06809f-25aa-47be-9aff-35b9dab65638',
-                     'created_at': datetime(2021-11-12 13:34:28.290619)}
+        test_args = {'updated_at': datetime(2021, 11, 14, 17, 1, 13, 727563),
+                     'id': 'b7e2bf1b-c80b-47ca-92ae-1c74149323e6',
+                     'created_at': datetime(2021, 11, 14, 17, 1, 13, 727393)}
         testmodel = BaseModel(test_args)
         testmodel.save()
-        self.cli.do_destroy("BaseModel f519fb40-1f5c-458b-945c-2ee8eaaf4900")
+        self.cli.do_destroy("BaseModel b7e2bf1b-c80b-47ca-92ae-1c74149323e6 ")
 
         with captured_output() as (out, err):
-            self.cli.do_show("BaseModel f519fb40-1f5c-458b-945c-2ee8eaaf4900")
+            self.cli.do_show("BaseModel b7e2bf1b-c80b-47ca-92ae-1c74149323e6 ")
         output = out.getvalue().strip()
         self.assertEqual(output, "** no instance found **")
 
@@ -107,13 +107,13 @@ class Test_Console(unittest.TestCase):
 
     def test_destroy_error_class_missing(self):
         with captured_output() as (out, err):
-            self.cli.do_destroy("d3da85f2-499c-43cb-b33d-3d7935bc808c")
+            self.cli.do_destroy("89fb5a8e-10a4-4dfe-9252-eee921991e79")
         output = out.getvalue().strip()
         self.assertEqual(output, "** class name missing **")
 
     def test_destroy_error_invalid_class(self):
         with captured_output() as (out, err):
-            self.cli.do_destroy("Human d3da85f2-499c-43cb-b33d-3d7935bc808c")
+            self.cli.do_destroy("Human 89fb5a8e-10a4-4dfe-9252-eee921991e79")
         output = out.getvalue().strip()
         self.assertEqual(output, "** class doesn't exist **")
 
@@ -125,16 +125,16 @@ class Test_Console(unittest.TestCase):
         self.assertEqual(output, "** no instance found **")
 
     def test_all_correct(self):
-        test_args = {'updated_at': datetime(2021, 11, 13, 22, 43, 1, 511108),
-                     'id': 'f519fb40-1f5c-458b-945c-2ee8eaaf4900',
-                     'created_at': datetime(2021, 11, 13, 22, 43, 1, 511108)}
+        test_args = {'updated_at': datetime(2021, 11, 14, 17, 1, 13, 727563),
+                     'id': 'b7e2bf1b-c80b-47ca-92ae-1c74149323e6',
+                     'created_at': datetime(2021, 11, 14, 17, 1, 13, 727393)}
         testmodel = BaseModel(test_args)
         testmodel.save()
         with captured_output() as (out, err):
             self.cli.do_all("")
         output = out.getvalue().strip()
         self.assertTrue("89fb5a8e-10a4-4dfe-9252-eee921991e79" in output)
-        self.assertTrue("f519fb40-1f5c-458b-945c-2ee8eaaf4900" in output)
+        self.assertTrue("b7e2bf1b-c80b-47ca-92ae-1c74149323e6" in output)
         self.assertFalse("123-456-abc" in output)
 
     def test_all_correct_with_class(self):

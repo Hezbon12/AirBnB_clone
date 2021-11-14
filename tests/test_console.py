@@ -26,15 +26,15 @@ class Test_Console(unittest.TestCase):
     def setUp(self):
         self.cli = HBNBCommand()
 
-        test_args = {'updated_at': datetime(2021, 11, 13, 22, 43, 1, 511108),
-                     'id': 'd3da85f2-499c-43cb-b33d-3d7935bc808c',
-                     'created_at': datetime(2021, 11, 13, 22, 43, 1, 511108),
-                     'name': 'Ace'}
+        test_args = {'updated_at': datetime(2021-11-13 21:45:24.249806),
+                     'id': '89fb5a8e-10a4-4dfe-9252-eee921991e79',
+                     'created_at': datetime(2021-11-13 21:45:24.249641),
+                     'name': 'Helidah'}
         self.model = BaseModel(test_args)
         self.model.save()
 
     def tearDown(self):
-        self.cli.do_destroy("BaseModel d3da85f2-499c-43cb-b33d-3d7935bc808c")
+        self.cli.do_destroy("BaseModel 89fb5a8e-10a4-4dfe-9252-eee921991e79")
 
     def test_quit(self):
         with self.assertRaises(SystemExit):
@@ -42,10 +42,10 @@ class Test_Console(unittest.TestCase):
 
     def test_show_correct(self):
         with captured_output() as (out, err):
-            self.cli.do_show("BaseModel d3da85f2-499c-43cb-b33d-3d7935bc808c")
+            self.cli.do_show("BaseModel 89fb5a8e-10a4-4dfe-9252-eee921991e79")
         output = out.getvalue().strip()
-        self.assertFalse("2021, 11, 13, 22, 43, 1, 511108" in output)
-        self.assertTrue('2021, 11, 13, 22, 43, 1, 511108' in output)
+        self.assertFalse("2021-11-13 21:45:24.249641" in output)
+        self.assertTrue('2021-11-13 21:45:24.249641' in output)
 
     def test_show_error_no_args(self):
         with captured_output() as (out, err):
@@ -67,7 +67,7 @@ class Test_Console(unittest.TestCase):
 
     def test_show_error_class_missing(self):
         with captured_output() as (out, err):
-            self.cli.do_show("d3da85f2-499c-43cb-b33d-3d7935bc808c")
+            self.cli.do_show("89fb5a8e-10a4-4dfe-9252-eee921991e79")
         output = out.getvalue().strip()
         self.assertEqual(output, "** no instance found **")
 
@@ -87,9 +87,9 @@ class Test_Console(unittest.TestCase):
         self.assertTrue(output in output2)
 
     def test_destroy_correct(self):
-        test_args = {'updated_at': datetime(2021, 11, 13, 22, 43, 1, 511108),
-                     'id': 'f519fb40-1f5c-458b-945c-2ee8eaaf4900',
-                     'created_at': datetime(2021, 11, 13, 22, 43, 1, 511108)}
+        test_args = {'updated_at': datetime(2021-11-12 13:34:28.290717),
+                     'id': 'fd06809f-25aa-47be-9aff-35b9dab65638',
+                     'created_at': datetime(2021-11-12 13:34:28.290619)}
         testmodel = BaseModel(test_args)
         testmodel.save()
         self.cli.do_destroy("BaseModel f519fb40-1f5c-458b-945c-2ee8eaaf4900")
@@ -133,7 +133,7 @@ class Test_Console(unittest.TestCase):
         with captured_output() as (out, err):
             self.cli.do_all("")
         output = out.getvalue().strip()
-        self.assertTrue("d3da85f2-499c-43cb-b33d-3d7935bc808c" in output)
+        self.assertTrue("89fb5a8e-10a4-4dfe-9252-eee921991e79" in output)
         self.assertTrue("f519fb40-1f5c-458b-945c-2ee8eaaf4900" in output)
         self.assertFalse("123-456-abc" in output)
 
@@ -142,7 +142,7 @@ class Test_Console(unittest.TestCase):
             self.cli.do_all("BaseModel")
         output = out.getvalue().strip()
         self.assertTrue(len(output) > 0)
-        self.assertTrue("d3da85f2-499c-43cb-b33d-3d7935bc808c" in output)
+        self.assertTrue("89fb5a8e-10a4-4dfe-9252-eee921991e79" in output)
 
     def test_all_error_invalid_class(self):
         with captured_output() as (out, err):
@@ -153,15 +153,15 @@ class Test_Console(unittest.TestCase):
     def test_update_correct(self):
         with captured_output() as (out, err):
             self.cli.do_update("BaseModel " +
-                               "d3da85f2-499c-43cb-b33d-3d7935bc808c name Bay")
+                               "89fb5a8e-10a4-4dfe-9252-eee921991e79 name Bay")
         output = out.getvalue().strip()
         self.assertEqual(output, '')
 
         with captured_output() as (out, err):
-            self.cli.do_show("BaseModel d3da85f2-499c-43cb-b33d-3d7935bc808c")
+            self.cli.do_show("BaseModel 89fb5a8e-10a4-4dfe-9252-eee921991e79")
         output = out.getvalue().strip()
         self.assertTrue("Bay" in output)
-        self.assertFalse("Ace" in output)
+        self.assertFalse("Helidah" in output)
 
     def test_update_error_invalid_id(self):
         with captured_output() as (out, err):
@@ -178,20 +178,20 @@ class Test_Console(unittest.TestCase):
     def test_update_error_invalid_class(self):
         with captured_output() as (out, err):
             self.cli.do_update("Human " +
-                               "d3da85f2-499c-43cb-b33d-3d7935bc808c name Cat")
+                               "89fb5a8e-10a4-4dfe-9252-eee921991e79 name Cat")
         output = out.getvalue().strip()
         self.assertEqual(output, "** class doesn't exist **")
 
     def test_update_error_no_class(self):
         with captured_output() as (out, err):
-            self.cli.do_update("d3da85f2-499c-43cb-b33d-3d7935bc808c name Cat")
+            self.cli.do_update("89fb5a8e-10a4-4dfe-9252-eee921991e79 name Cat")
         output = out.getvalue().strip()
         self.assertEqual(output, "** class name missing **")
 
     def test_update_error_missing_value(self):
         with captured_output() as (out, err):
             self.cli.do_update("BaseModel " +
-                               "d3da85f2-499c-43cb-b33d-3d7935bc808c name")
+                               "89fb5a8e-10a4-4dfe-9252-eee921991e79 name")
         output = out.getvalue().strip()
         self.assertEqual(output, "** value missing **")
 

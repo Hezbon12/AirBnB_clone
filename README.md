@@ -1,9 +1,9 @@
 <img src="https://github.com/jarehec/AirBnB_clone_v3/blob/master/dev/HBTN-hbnb-Final.png" width="160" height=auto />
 
-# AirBnB Clone
+# AirBnB Clone Project
 
 ### Description
-> This is phase one of the Airbnb Clone: the console.
+> This is phase one of the Airbnb Clone project: the console.
 > This repository holds a command interpreter and classes (i.e. BaseModel class
 > and several other classes that inherit from it: Amenity, City, State, Place,
 > Review). The command interpreter, like a shell,
